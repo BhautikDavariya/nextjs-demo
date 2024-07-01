@@ -10,6 +10,7 @@ import * as Yup from "yup";
 const Index = () => {
   const registerPlayer = useSelector((state) => state?.registerPlayer);
   const router = useRouter();
+
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
