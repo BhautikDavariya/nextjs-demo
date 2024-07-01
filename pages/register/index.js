@@ -11,6 +11,7 @@ const Index = () => {
   const registerPlayer = useSelector((state) => state?.registerPlayer);
   const router = useRouter();
   const dispatch = useDispatch();
+
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(5, "Too Short!")
@@ -55,8 +56,7 @@ const Index = () => {
     <div className="h-[100vh] flex flex-col justify-center align-middle items-center">
       <Card className="bg-white w-[40%]" title="Register">
         <form onSubmit={formik.handleSubmit}>
-          <Form.Item
-          >
+          <Form.Item>
             <Input
               // prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Username"
@@ -70,9 +70,7 @@ const Index = () => {
               </div>
             ) : null}
           </Form.Item>
-          <Form.Item
-          
-          >
+          <Form.Item>
             <Input
               // prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="firstname"
@@ -86,9 +84,7 @@ const Index = () => {
               </div>
             ) : null}
           </Form.Item>
-          <Form.Item
-          
-          >
+          <Form.Item>
             <Input
               // prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="lastname"
@@ -102,9 +98,7 @@ const Index = () => {
               </div>
             ) : null}
           </Form.Item>
-          <Form.Item
-          
-          >
+          <Form.Item>
             <Input
               // prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="email"
@@ -117,9 +111,7 @@ const Index = () => {
               <div className="text-sm text-red-500">{formik.errors.email}</div>
             ) : null}
           </Form.Item>
-          <Form.Item
-           
-          >
+          <Form.Item>
             <Input
               // prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
