@@ -1,5 +1,5 @@
 "use client";
-// import { Button } from "antd";
+// import { button } from "antd";
 import React, { useState } from "react";
 
 const Sidebar = () => {
@@ -45,7 +45,7 @@ const Sidebar = () => {
         className={`flex-1  
                         ${isOpen ? "ml-64" : "ml-0"}`}
       >
-        {/* Button to toggle sidebar */}
+        {/* button to toggle sidebar */}
         <div className="ml-auto">
           <button
             className="bg-blue-500 hover:bg-blue-700 

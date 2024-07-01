@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
-import { Button } from "antd";
+// import { button } from "antd";
 import { useSelector } from "react-redux";
 import ThemeToggle from "@/pages/ThemeToggle";
 
@@ -32,55 +32,55 @@ const Header = (props) => {
             {registerPlayer && !registerPlayer?.id ? (
               <div className="grid grid-cols-2">
                 <div className="col-span-1">
-                  <Button
+                  <button
                     type="primary"
-                    className="rounded-md"
+                    className="rounded-md py-2 px-2 bg-green-300 text-black"
                     onClick={() => router.push("/login")}
                   >
                     Login
-                  </Button>
+                  </button>
                 </div>
                 <div>
-                  <Button
+                  <button
                     type="primary"
-                    className="rounded-md"
+                    className="rounded-md py-2 px-2 bg-blue-300 text-black"
                     onClick={() => router.push("/register")}
                   >
                     Ragister
-                  </Button>
+                  </button>
                 </div>
               </div>
             ) : !user?.id ? (
               <div className="grid grid-cols-2">
                 <div className="col-span-1">
-                  <Button
+                  <button
                     type="primary"
-                    className="rounded-md"
+                    className="rounded-md py-2 px-2 bg-green-300 text-black"
                     onClick={() => router.push("/login")}
                   >
                     Login
-                  </Button>
+                  </button>
                 </div>
                 <div>
-                  <Button
+                  <button
                     type="primary"
-                    className="rounded-md"
+                    className="rounded-md py-2 px-2 bg-blue-300 text-black"
                     onClick={() => router.push("/register")}
                   >
                     Ragister
-                  </Button>
+                  </button>
                 </div>
               </div>
             ) : (
               <div className="grid grid-cols-1">
                 <div className="col-span-1">
-                  <Button
+                  <button
                     type="primary"
-                    className="rounded-md bg-red-500"
+                    className="rounded-md py-2 px-2 text-black bg-red-500"
                     onClick={() => logOutUser()}
                   >
                     Logout
-                  </Button>
+                  </button>
                 </div>
               </div>
             )}

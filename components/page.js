@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect, useState } from "react";
 import { loadData } from "@/actions";
-import { Button } from "antd";
-import { useRouter } from "next/router";
+// import { button } from "antd";
+// import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
 function Page({ title, themeMode }) {
@@ -44,9 +44,13 @@ function Page({ title, themeMode }) {
           </h1>
           <nav>
             {/* <Link href={linkTo}>Navigate: {NavigateTo}</Link> */}
-            <Button type="link" onClick={logOutUser}>
+            <button
+              type="link"
+              className="text-blue-400 underline"
+              onClick={logOutUser}
+            >
               Logout
-            </Button>
+            </button>
           </nav>
         </>
       ) : user?.id ? (
@@ -59,9 +63,9 @@ function Page({ title, themeMode }) {
             {title} : {user?.username}
           </h1>
           <nav>
-            <Button type="link" onClick={logOutUser}>
+            <button type="link" onClick={logOutUser}>
               Logout
-            </Button>
+            </button>
           </nav>
         </>
       ) : (
