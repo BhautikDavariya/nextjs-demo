@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 // import { button } from "antd";
 import React, { useState } from "react";
 
@@ -20,22 +21,24 @@ const Sidebar = () => {
         {/* Sidebar content */}
         <div className="flex flex-col items-center">
           <div className="mt-4">
-            <a
-              href="#"
+            <Link
+              prefetch={false}
+              href="/"
               className="text-white 
                           hover:text-gray-300"
             >
               Home
-            </a>
+            </Link>
           </div>
           <div className="mt-4">
-            <a
-              href="#"
+            <Link
+              prefetch={false}
+              href="/about"
               className="text-white 
                           hover:text-gray-300"
             >
               About
-            </a>
+            </Link>
           </div>
           {/* Add more sidebar items here */}
         </div>

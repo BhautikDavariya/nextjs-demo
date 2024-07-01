@@ -1,26 +1,26 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
-
-import { useEffect, useState } from "react";
-import { loadData } from "@/actions";
-// import { button } from "antd";
-// import { useRouter } from "next/router";
-import Cookies from "js-cookie";
-
-function Page({ title, themeMode }) {
+import { useSelector } from "react-redux";
+import { useContext, useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { themProvider } from "@/pages/Layout";
+function Page({ title }) {
+  const { themeMode, lung } = useContext(themProvider);
   const registerPlayer = useSelector((state) => state?.registerPlayer);
-  const theme = Cookies.get("theme");
   const [user, setUser] = useState(null);
-  const dispatch = useDispatch();
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
       setUser(JSON.parse(userData));
     }
-    dispatch(loadData());
   }, []);
 
-  console.log("theme", theme);
+  useEffect(() => {
+    if (registerPlayer?.id) {
+      const notify = () => toast("Login Successfull!");
+      notify();
+    }
+  }, [registerPlayer]);
 
   const logOutUser = () => {
     localStorage.removeItem("user");
@@ -69,8 +69,26 @@ function Page({ title, themeMode }) {
           </nav>
         </>
       ) : (
-        ""
+        <div
+          className={`text-3xl ${
+            themeMode === "dark" ? "bg-black text-white" : "bg-white text-black"
+          }`}
+        >
+          {lung["name"]}
+        </div>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

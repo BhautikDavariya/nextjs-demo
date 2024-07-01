@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 // import { button } from "antd";
 import { useSelector } from "react-redux";
 import ThemeToggle from "@/pages/ThemeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = (props) => {
   const { setThemeMode } = props;
@@ -46,7 +47,7 @@ const Header = (props) => {
                     className="rounded-md py-2 px-2 bg-blue-300 text-black"
                     onClick={() => router.push("/register")}
                   >
-                    Ragister
+                    Register
                   </button>
                 </div>
               </div>
@@ -67,7 +68,7 @@ const Header = (props) => {
                     className="rounded-md py-2 px-2 bg-blue-300 text-black"
                     onClick={() => router.push("/register")}
                   >
-                    Ragister
+                    Register
                   </button>
                 </div>
               </div>
@@ -86,6 +87,9 @@ const Header = (props) => {
             )}
             <div className="ms-3">
               <ThemeToggle setThemeMode={setThemeMode} />
+            </div>
+            <div className="ms-3">
+              <LanguageSwitcher />
             </div>
           </div>
         </div>

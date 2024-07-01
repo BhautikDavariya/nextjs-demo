@@ -1,14 +1,16 @@
 "use client";
-import React, { useEffect } from "react";
-// import { LockOutlined, UserOutlined } from "@ant-design/icons";
-// import { button, div, form, input } from "antd";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { loginPalyer } from "@/actions";
+import { errorState, loginPalyer } from "@/actions";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Index = () => {
   const registerPlayer = useSelector((state) => state?.registerPlayer);
+  const error = useSelector((state) => state?.error);
+  const [thoreError, setThoreError] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
@@ -20,12 +22,12 @@ const Index = () => {
       .min(5, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
-    email: Yup.string().email("Invalid email").required("Required"),
+    // email: Yup.string().email("Invalid email").required("Required"),
   });
   const formik = useFormik({
     initialValues: {
       username: "",
-      email: "",
+      // email: "",
       password: "",
     },
     validationSchema: SignupSchema,
@@ -33,6 +35,16 @@ const Index = () => {
       dispatch(loginPalyer(values));
     },
   });
+
+  useEffect(() => {
+    if (error?.response?.data?.error && thoreError) {
+      const notify = () => toast.error(error?.response?.data?.error);
+      notify();
+    } else {
+      dispatch(errorState(null));
+      setThoreError(true);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (registerPlayer?.id) {
@@ -44,7 +56,7 @@ const Index = () => {
   return (
     <div className="h-[100vh] flex flex-col justify-center align-middle items-center">
       <div className="bg-white w-[40%] p-4" title="Register">
-        <div className="text-3xl text-black mb-3">Register:</div>
+        <div className="text-3xl text-black mb-3">Login:</div>
         <form onSubmit={formik.handleSubmit} className="space-y-5">
           <div>
             <input
@@ -61,7 +73,7 @@ const Index = () => {
               </div>
             ) : null}
           </div>
-          <div>
+          {/* <div>
             <input
               // prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="email"
@@ -74,7 +86,7 @@ const Index = () => {
             {formik.errors.email && formik.touched.email ? (
               <div className="text-sm text-red-500">{formik.errors.email}</div>
             ) : null}
-          </div>
+          </div> */}
           <div>
             <input
               // prefix={<LockOutlined className="site-form-item-icon" />}
@@ -109,6 +121,18 @@ const Index = () => {
           </div>
         </form>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

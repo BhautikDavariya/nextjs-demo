@@ -1,15 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { LockOutlined, UserOutlined } from "@ant-design/icons";
 // import { button, div, form, input } from "antd";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { ragisterPalyer } from "@/actions";
+import { errorState, failure, ragisterPalyer } from "@/actions";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Index = () => {
   const registerPlayer = useSelector((state) => state?.registerPlayer);
   const router = useRouter();
+  const error = useSelector((state) => state?.error);
+  const [thoreError, setThoreError] = useState(false);
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
@@ -43,6 +47,16 @@ const Index = () => {
       dispatch(ragisterPalyer(values, router));
     },
   });
+
+  useEffect(() => {
+    if (error?.response?.data?.error && thoreError) {
+      const notify = () => toast.error(error?.response?.data?.error);
+      notify();
+    } else {
+      dispatch(errorState(null));
+      setThoreError(true);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (registerPlayer?.id) {
@@ -149,6 +163,18 @@ const Index = () => {
           </div>
         </form>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
